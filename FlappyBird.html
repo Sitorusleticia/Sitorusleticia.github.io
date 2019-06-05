@@ -2,8 +2,21 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>Processing Demo</title>
-<script type="text/javascript" src="js/processing.js"></script>
+<script type="text/javascript" src="processing.js"></script>
 </head>
+<body>
+<script type="text/processing">
+
+
+
+
+
+
+
+// flappybird code 
+
+
+
 
 <body>
 <script type="text/processing">
@@ -21,10 +34,10 @@ int[] wy = new int[2];
 
 void setup() {
   
-  backImg = loadImage("./backImg.jpeg");
+  backImg = loadImage("./backImg.jpg");
   playerImg = loadImage("./playerImg.png");
   wallImg = loadImage("./wallImg.png"); 
-  startImg = loadImage("./start.jpg"); 
+  startImg = loadImage("./startImg.jpg"); 
   
   
   size(600,800);
@@ -88,3 +101,4 @@ void mousePressed() {
 <canvas id="sketch" style="border: 1px solid black;"></canvas>
 </body>
 </html>
+

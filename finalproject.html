@@ -1,0 +1,329 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Processing Demo</title>
+<script type="text/javascript" src="processing.js"></script>
+</head>
+<body>
+<script type="text/processing">
+
+
+
+
+
+
+
+/**
+* @ Author Leticia Sitorus
+* @ Version: 1.0
+* @ Period 2
+* @ Date: 6/06/19
+*/
+
+float x = 700;
+float y = 350;
+float spd = 0.5;
+float paddle1Y;
+float paddle2Y;
+int p1Score = 0;
+int p2Score = 0;
+int p1Life = 10;
+int p2Life = 10;
+int dirX = -1;
+int dirY = -1;
+int state = 0;
+void setup() {
+  size(800, 600);
+  noStroke();
+  smooth();
+}
+void draw() {
+  background(255,218,185);      
+  //*Menu
+  if (state == 0) {              //INITIAL SCREEN 
+    fill(210,105,30);
+    textSize(85);
+    text("FINAL PROJECT", 36, 200);
+    textSize(40);
+    text("(CLICK TO START)", 36, 300);      //BUTTON 
+    p1Life = 10;
+    p2Life = 10;
+    if (mousePressed) {
+      state = 1;
+    }
+  }
+  //*Reset
+  else if (state == 1) {       //GAME SCREEN 
+    stroke(255);
+    strokeWeight(5);
+    fill(230,230,250);
+    ellipse(85, paddle1Y, 30, 30);
+    rect(40, paddle1Y - 50, 20, 100); 
+    rect(740, paddle2Y - 50, 20, 100);
+    if (mousePressed) {
+      if (keyPressed && key == 'q') 
+        paddle1Y = paddle1Y - 8;
+      else if (keyPressed && key == 'a') 
+        paddle1Y = paddle1Y + 8;
+      if (keyPressed && key == 'p') 
+        paddle2Y = paddle2Y - 8;
+      else if (keyPressed && key == 'l') 
+        paddle2Y = paddle2Y + 8;
+      x = 75;
+      y = paddle1Y;
+      dirX = 1;                      // add or subtract speed of ball
+      dirY = 1;
+      state = 2;
+    }
+  }
+  //*Game Play
+  else if (state == 2) {
+    if (keyPressed && key == 'q') 
+      paddle1Y = paddle1Y - 8;
+    else if (keyPressed && key == 'a') 
+      paddle1Y = paddle1Y + 8;
+    if (keyPressed && key == 'p') 
+      paddle2Y = paddle2Y - 8;
+    else if (keyPressed && key == 'l') 
+      paddle2Y = paddle2Y + 8;
+    fill(255);
+    //  Check The Walls
+    if (x > 800 || x < 0) {                  // if the ball hits either wall
+      dirX *= -1;                          //flip the sign (change direction)
+    }
+    if (y > 600 || y < 0) {                // if the ball hits either wall
+      dirY *= -1;                          //flip the sign (change direction)
+    }
+    //  Check The P1 Paddle
+    if (x <= 70 && y >= paddle1Y - 50 &&  y <= paddle1Y + 50 && x >= 5) {
+      dirX *= -1;                      //flip the sign (change direction)
+      dirX += 1;
+      p1Score++;                       //Adds the score by 1
+    }
+    //  Check The P2 Paddle
+    if (x > width - 75 && y >= paddle2Y - 50 &&  y <= paddle2Y + 50 && x >= 5) {
+      dirX *= -1;                      //flip the sign (change direction)
+      dirX += -1;
+      p2Score++;                     //Adds the score by 1
+    }
+    if (p1Score == 5) {
+      ellipse(x, y, 30, 30);
+    }
+    if (p2Score == 5) {
+      ellipse(x, y, 30, 30);
+    }
+    x += 2.5*dirX;                    // add or subtract speed of ball
+    y += 2.5*dirY;
+    stroke(255);
+    strokeWeight(5);
+    fill(230,230,250);
+    ellipse(x, y, 30, 30);            // draw the ball
+    rect(40, paddle1Y - 50, 20, 100);  // draw the paddle
+    stroke(255);
+    strokeWeight(5);
+    fill(230,230,250);
+    rect(740, paddle2Y - 50, 20, 100);  // draw the paddle
+    if (x > 740) {
+      p2Life--;
+      state = 1;
+    }
+    if (x < 40) {
+      p1Life--;
+      state = 1;
+    }
+    if (p1Life == 0) {
+      state = 3;
+    }
+    if (p2Life == 0) {
+      state = 3;
+    }
+    fill(255);
+  
+    //displays score and lives remaining.
+    textSize(30);
+    text("P1 Score:" + p1Score + " ", 50, 50);
+    text("P1 Lives:" + p1Life + " ", 50, 85);
+    text("P2 Score:" + p2Score + " ", 500, 50);
+    text("P2 Lives:" + p2Life + " ", 500, 85);
+  }
+  
+  //*Game Over
+  else if (state == 3) {
+    background(255, 0, 0);
+    fill(55);
+    textSize(80);
+    text("GAME OVER", 158, 200);
+    fill(0);
+    textSize(40);
+    text("CLICK TO RESTART", 200, 400);
+    if (mousePressed) { 
+      state = 0;
+    }
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+<canvas id="sketch" style="border: 1px solid black;"></canvas>
+</body>
+</html>
+
+
+
+
+
+
